@@ -1,0 +1,11 @@
+--- qca-1.0/qcextra~	2003-12-21 01:11:51.000000000 +0100
++++ qca-1.0/qcextra	2004-12-22 09:25:48.439263992 +0100
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+ 
+ cat >extra.pri <<EOT
+-target.path=$PREFIX/lib
++target.path=$LIBDIR
+ INSTALLS += target
+ 
+ incfiles.path=$PREFIX/include
