@@ -29,7 +29,7 @@ Requires:	qt-devel >= 3.1.2
 %description devel
 Qt Cryptographic Architecture (QCA) Library - development files.
 
-%description -l pl devel
+%description devel -l pl
 Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów.
 
 %prep
