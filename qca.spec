@@ -7,7 +7,7 @@ License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://delta.affinix.com/qca/%{name}-%{version}.tar.bz2
 # Source0-md5:	ee44022eb0e5b8b5df64c62630f6e6b6
-Patch0:		%name-libs.patch
+Patch0:		%{name}-libs.patch
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
