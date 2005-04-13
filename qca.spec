@@ -11,6 +11,7 @@ Patch0:		%{name}-libs.patch
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	qmake
 BuildRequires:	qt-devel >= 3.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
