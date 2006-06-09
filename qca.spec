@@ -24,8 +24,8 @@ Biblioteka Qt Cryptographic Architecture (QCA).
 %package devel
 Summary:	Qt Cryptographic Architecture (QCA) Library - development files
 Summary(pl):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 Requires:	qt-devel >= 3.1.2
 
 %description devel
