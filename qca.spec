@@ -36,7 +36,7 @@ Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
 
 %build
 export QTDIR=%{_prefix}
