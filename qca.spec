@@ -1,5 +1,5 @@
 Summary:	Qt Cryptographic Architecture (QCA) Library
-Summary(pl):	Biblioteka Qt Cryptographic Architecture (QCA)
+Summary(pl.UTF-8):   Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
 Version:	1.0
 Release:	2
@@ -18,12 +18,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Qt Cryptographic Architecture (QCA) Library.
 
-%description -l pl
+%description -l pl.UTF-8
 Biblioteka Qt Cryptographic Architecture (QCA).
 
 %package devel
 Summary:	Qt Cryptographic Architecture (QCA) Library - development files
-Summary(pl):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
+Summary(pl.UTF-8):   Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistÃ³w
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	qt-devel >= 3.1.2
@@ -31,8 +31,8 @@ Requires:	qt-devel >= 3.1.2
 %description devel
 Qt Cryptographic Architecture (QCA) Library - development files.
 
-%description devel -l pl
-Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów.
+%description devel -l pl.UTF-8
+Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistÃ³w.
 
 %prep
 %setup -q
