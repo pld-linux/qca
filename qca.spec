@@ -12,7 +12,7 @@ URL:		http://delta.affinix.com/qca/
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qmake
-BuildRequires:	qt-devel >= 3.1.2
+BuildRequires:	qt-devel >= 6:3.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,7 +26,7 @@ Summary:	Qt Cryptographic Architecture (QCA) Library - development files
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	qt-devel >= 3.1.2
+Requires:	qt-devel >= 6:3.1.2
 
 %description devel
 Qt Cryptographic Architecture (QCA) Library - development files.
