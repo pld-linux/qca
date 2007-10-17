@@ -14,10 +14,12 @@ Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	07d54358ef4880d05b3c6f56b629aa55
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
+BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtTest-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
+BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -72,7 +74,10 @@ install -d $RPM_BUILD_ROOT%{_pkgconfigdir}
 	INSTALL_ROOT=$RPM_BUILD_ROOT
 
 install lib/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
+
+%if %{_lib} == "lib64"
 rm -rf  $RPM_BUILD_ROOT%{_prefix}/lib/pkgconfig
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
