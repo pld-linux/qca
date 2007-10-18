@@ -1,0 +1,21 @@
+--- qca-2.0.0/CMakeLists.txt	2007-09-30 15:54:31.000000000 +0000
++++ qca-2.0.0/CMakeLists.txt-new	2007-10-18 19:17:17.961979777 +0000
+@@ -131,7 +131,6 @@
+ 
+ add_subdirectory(src)
+ add_subdirectory(tools)
+-add_subdirectory(plugins)
+ if(BUILD_TESTS)
+ 	ENABLE_TESTING()
+         add_subdirectory(unittest)
+--- qca-2.0.0/cmake/modules/FindQt4.cmake	2006-10-08 06:53:40.000000000 +0000
++++ qca-2.0.0/cmake/modules/FindQt4.cmake-new	2007-10-18 19:16:59.744441734 +0000
+@@ -180,7 +180,7 @@
+ ENDIF(WIN32)
+ 
+ # check for qmake
+-FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake qmake-qt4 PATHS
++FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qt4-qmake qmake qmake-qt4 PATHS
+   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\4.0.0;InstallDir]/bin"
+   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\4.0.0;InstallDir]/bin"
+   $ENV{QTDIR}/bin
