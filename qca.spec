@@ -75,7 +75,7 @@ install -d $RPM_BUILD_ROOT%{_pkgconfigdir}
 
 install lib/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 
-%if %{_lib} == "lib64"
+%if "%{_lib}" == "lib64"
 rm -rf  $RPM_BUILD_ROOT%{_prefix}/lib/pkgconfig
 %endif
 
