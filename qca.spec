@@ -23,6 +23,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
+BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,7 +53,7 @@ programistów.
 %build
 mkdir build
 cd build
-%{__cmake} \
+%cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DLIB_INSTALL_DIR=%{_libdir} \
 	-DQT_MKSPECS_DIR=%{_datadir}/qt4/mkspecs/features \
