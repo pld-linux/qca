@@ -12,11 +12,13 @@ License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	07d54358ef4880d05b3c6f56b629aa55
+Patch0:		%{name}-cmake.patch
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtTest-devel
+BuildRequires:	cmake
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qt4-build
@@ -45,13 +47,16 @@ programistów.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-./configure \
-	--prefix=%{_prefix} \
-	--libdir=%{_libdir} \
-	--datadir=%{_datadir}
-qt4-qmake
+mkdir build
+cd build
+%{__cmake} \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DLIB_INSTALL_DIR=%{_libdir} \
+	-DQT_MKSPECS_DIR=%{_datadir}/qt4/mkspecs/features \
+	../
 %{__make}
 
 %install
@@ -59,10 +64,10 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_pkgconfigdir}
 
-%{__make} install \
-	INSTALL_ROOT=$RPM_BUILD_ROOT
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install lib/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
+install build/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 
 %if "%{_lib}" == "lib64"
 rm -rf  $RPM_BUILD_ROOT%{_prefix}/lib/pkgconfig
@@ -79,13 +84,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/*.so.*
-%{_mandir}/man1/*.1*
-%{_datadir}/qca
+#%{_mandir}/man1/*.1*
+#%{_datadir}/qca
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/QtCrypto
 %{_pkgconfigdir}/*.pc
-%{_libdir}/libqca.prl
-%{_datadir}/qt4/mkspecs/features/crypto.prf
+#%{_libdir}/libqca.prl
+#%{_datadir}/qt4/mkspecs/features/crypto.prf
