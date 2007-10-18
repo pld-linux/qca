@@ -47,22 +47,11 @@ programistów.
 %setup -q
 
 %build
-export QTDIR=%{_prefix}
-export LIBDIR=%{_libdir}
-
 ./configure \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--datadir=%{_datadir}
-
-# probably could be done but breaks the build now:
-#
-#qmake %{name}.pro \
-#	QMAKE_CXX="%{__cxx}" \
-#	QMAKE_LINK="%{__cxx}" \
-#	QMAKE_CXXFLAGS_RELEASE="%{rpmcflags}" \
-#	QMAKE_RPATH=
-
+qt4-qmake
 %{__make}
 
 %install
