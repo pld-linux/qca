@@ -19,8 +19,8 @@ BuildRequires:	QtNetwork-devel
 BuildRequires:	QtTest-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	qt4-build
-BuildRequires:	qt4-qmake
+BuildRequires:	qt4-build >= 4.3.3-3
+BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,7 +51,7 @@ programistów.
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--datadir=%{_datadir}
-qt4-qmake
+qmake-qt4
 %{__make}
 
 %install
