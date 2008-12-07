@@ -6,12 +6,12 @@
 Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
-Version:	2.0.0
-Release:	3
+Version:	2.0.1
+Release:	1
 License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	07d54358ef4880d05b3c6f56b629aa55
+# Source0-md5:	a0a87d0b3210e23f8c1713562282b7d6
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
@@ -57,16 +57,8 @@ qmake-qt4
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_pkgconfigdir}
-
 %{__make} install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT
-
-install lib/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
-
-%if "%{_lib}" == "lib64"
-rm -rf  $RPM_BUILD_ROOT%{_prefix}/lib/pkgconfig
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
