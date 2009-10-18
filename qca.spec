@@ -6,12 +6,12 @@
 Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
-Version:	2.0.1
+Version:	2.0.2
 Release:	1
 License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	a0a87d0b3210e23f8c1713562282b7d6
+# Source0-md5:	27ebdfbd9869d90dae078a6decd029f4
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
