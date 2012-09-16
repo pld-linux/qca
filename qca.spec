@@ -12,6 +12,7 @@ License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	fc15bd4da22b8096c51fcfe52d2fa309
+Patch0:		%{name}-gcc47.patch
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
@@ -21,6 +22,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
+BuildRequires:	which
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,6 +47,7 @@ programistów.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure \
