@@ -1,28 +1,30 @@
-# TODO:
-# - fix chrpath
-#
-# chrpath stripping fails
-%define	no_install_post_chrpath	1
 Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
-Version:	2.0.3
-Release:	4
+Version:	2.1.1
+Release:	1
 License:	LGPL v2.1
 Group:		Libraries
-Source0:	http://delta.affinix.com/download/qca/2.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	fc15bd4da22b8096c51fcfe52d2fa309
+Source0:	http://download.kde.org/stable/%{name}/%{version}/src/%{name}-%{version}.tar.xz
+# Source0-md5:	657cc701316600199199a6b6cb2c73c9
 Patch0:		%{name}-gcc47.patch
 URL:		http://delta.affinix.com/qca/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtTest-devel
+BuildRequires:	Qt5Core-devel
+BuildRequires:	Qt5Gui-devel
+BuildRequires:	Qt5Network-devel
+BuildRequires:	Qt5Test-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	nss-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qt4-build >= 4.3.3-3
+BuildRequires:	qt5-build
 BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	which
+BuildRequires:	cmake >= 2.8.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,26 +47,61 @@ Qt Cryptographic Architecture (QCA) Library - development files.
 Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla
 programistów.
 
+%package -n qca-qt5
+Summary:	Qt Cryptographic Architecture (QCA) Library
+Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
+Group:		Libraries
+URL:		http://download.kde.org/stable/qca/
+
+%description -n qca-qt5
+Qt Cryptographic Architecture (QCA) Library. qt5 version
+
+%description -n qca-qt5 -l pl.UTF-8
+Biblioteka Qt Cryptographic Architecture (QCA).
+
+%package -n qca-qt5-devel
+Summary:	Qt Cryptographic Architecture (QCA) Library - development files
+Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
+Group:		Development/Libraries
+Requires:	qca-qt5 = %{version}-%{release}
+Requires:	QtCore-devel
+
+%description -n qca-qt5-devel
+Qt Cryptographic Architecture (QCA) Library - development files.
+
+%description -n qca-qt5-devel -l pl.UTF-8
+Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla
+programistów.
+
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-./configure \
-	--prefix=%{_prefix} \
-	--libdir=%{_libdir} \
-	--datadir=%{_datadir}
-qmake-qt4
+install -d build4
+cd build4
+%cmake \
+	-DQCA_LIBRARY_INSTALL_DIR=%{_libdir} \
+	-DQCA_FEATURE_INSTALL_DIR=%{_datadir}/qt4/mkspecs/features/ \
+	-DQT4_BUILD=ON \
+	..
+%{__make}
+cd ..
+
+install -d build5
+cd build5
+%cmake \
+	-DQCA_INSTALL_IN_QT_PREFIX=ON \
+	-DQCA_MAN_INSTALL_DIR=%{_mandir} \
+	..
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%{__make} -C build4 install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-%{__make} install \
-	INSTALL_ROOT=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/*.debug*
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.debug*
+%{__make} -C build5 install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,19 +109,55 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
+%post -n qca-qt5 -p /sbin/ldconfig
+%postun -n qca-qt5 -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) %{_bindir}/qcatool2
+%attr(755,root,root) %{_bindir}/qcatool
+%attr(755,root,root) /usr/bin/mozcerts
 %ghost %attr(755,root,root) %{_libdir}/libqca.so.2
 %attr(755,root,root) %{_libdir}/libqca.so.*.*
-%{_mandir}/man1/*.1*
-%{_datadir}/qca
+%dir /usr/lib64/qca
+%dir /usr/lib64/qca/crypto
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-cyrus-sasl.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-gcrypt.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-gnupg.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-logger.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-nss.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-ossl.so
+%attr(755,root,root) /usr/lib64/qca/crypto/libqca-softstore.so
+%{_mandir}/man1/qcatool.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libqca.so
 %{_includedir}/QtCrypto
-%{_pkgconfigdir}/*.pc
-%{_libdir}/libqca.prl
+%{_pkgconfigdir}/qca2.pc
 %{_datadir}/qt4/mkspecs/features/crypto.prf
+%{_libdir}/cmake/Qca
+
+%files -n qca-qt5
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/qt5/bin/mozcerts-qt5
+%attr(755,root,root) %{_libdir}/qt5/bin/qcatool-qt5
+#%{_prefix}/certs/rootcerts.pem
+%attr(755,root,root) %ghost %{_libdir}/libqca-qt5.so.2
+%attr(755,root,root) %{_libdir}/libqca-qt5.so.*.*
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-cyrus-sasl.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-gcrypt.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-gnupg.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-logger.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-nss.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-ossl.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-softstore.so
+%{_mandir}/man1/qcatool-qt5.1*
+
+%files -n qca-qt5-devel
+%defattr(644,root,root,755)
+%{_includedir}/qt5/Qca-qt5
+%{_libdir}/cmake/Qca-qt5
+%attr(755,root,root) %{_libdir}/libqca-qt5.so
+%{_pkgconfigdir}/qca2-qt5.pc
+%{_libdir}/qt5/mkspecs/features/crypto.prf
