@@ -5,26 +5,26 @@ Version:	2.1.1
 Release:	1
 License:	LGPL v2.1
 Group:		Libraries
-Source0:	http://download.kde.org/stable/%{name}/%{version}/src/%{name}-%{version}.tar.xz
+Source0:	http://download.kde.org/stable/qca/%{version}/src/%{name}-%{version}.tar.xz
 # Source0-md5:	657cc701316600199199a6b6cb2c73c9
 Patch0:		%{name}-gcc47.patch
 URL:		http://delta.affinix.com/qca/
-BuildRequires:	QtCore-devel
-BuildRequires:	QtGui-devel
-BuildRequires:	QtNetwork-devel
-BuildRequires:	QtTest-devel
 BuildRequires:	Qt5Core-devel
 BuildRequires:	Qt5Gui-devel
 BuildRequires:	Qt5Network-devel
 BuildRequires:	Qt5Test-devel
+BuildRequires:	QtCore-devel
+BuildRequires:	QtGui-devel
+BuildRequires:	QtNetwork-devel
+BuildRequires:	QtTest-devel
+BuildRequires:	cmake >= 2.8.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	nss-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	qt4-build >= 4.3.3-3
-BuildRequires:	qt5-build
 BuildRequires:	qt4-qmake >= 4.3.3-3
+BuildRequires:	qt5-build
 BuildRequires:	which
-BuildRequires:	cmake >= 2.8.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,8 +63,8 @@ Biblioteka Qt Cryptographic Architecture (QCA).
 Summary:	Qt Cryptographic Architecture (QCA) Library - development files
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
 Group:		Development/Libraries
-Requires:	qca-qt5 = %{version}-%{release}
 Requires:	QtCore-devel
+Requires:	qca-qt5 = %{version}-%{release}
 
 %description -n qca-qt5-devel
 Qt Cryptographic Architecture (QCA) Library - development files.
@@ -116,18 +116,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/qcatool
-%attr(755,root,root) /usr/bin/mozcerts
+%attr(755,root,root) %{_bindir}/mozcerts
 %ghost %attr(755,root,root) %{_libdir}/libqca.so.2
 %attr(755,root,root) %{_libdir}/libqca.so.*.*
-%dir /usr/lib64/qca
-%dir /usr/lib64/qca/crypto
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-cyrus-sasl.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-gcrypt.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-gnupg.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-logger.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-nss.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-ossl.so
-%attr(755,root,root) /usr/lib64/qca/crypto/libqca-softstore.so
+%dir %{_libdir}/qca
+%dir %{_libdir}/qca/crypto
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-cyrus-sasl.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-gcrypt.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-gnupg.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-logger.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-nss.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-ossl.so
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-softstore.so
 %{_mandir}/man1/qcatool.1*
 
 %files devel
