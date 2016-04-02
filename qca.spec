@@ -2,7 +2,7 @@ Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
 Version:	2.1.1
-Release:	2
+Release:	3
 License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://download.kde.org/stable/qca/%{version}/src/%{name}-%{version}.tar.xz
@@ -145,6 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_prefix}/certs/rootcerts.pem
 %attr(755,root,root) %ghost %{_libdir}/libqca-qt5.so.2
 %attr(755,root,root) %{_libdir}/libqca-qt5.so.*.*
+%dir %{_libdir}/qt5/plugins/crypto
 %attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-cyrus-sasl.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-gcrypt.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/crypto/libqca-gnupg.so
