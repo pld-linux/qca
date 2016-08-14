@@ -2,7 +2,7 @@ Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
 Version:	2.1.1
-Release:	3
+Release:	4
 License:	LGPL v2.1
 Group:		Libraries
 Source0:	http://download.kde.org/stable/qca/%{version}/src/%{name}-%{version}.tar.xz
@@ -79,6 +79,7 @@ programistów.
 %build
 install -d build4
 cd build4
+QC_CERTSTORE_PATH=/etc/certs/ca-certificates.crt; export QC_CERTSTORE_PATH
 %cmake \
 	-DQCA_LIBRARY_INSTALL_DIR=%{_libdir} \
 	-DQCA_FEATURE_INSTALL_DIR=%{_datadir}/qt4/mkspecs/features/ \
