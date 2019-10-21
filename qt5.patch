@@ -1,0 +1,10 @@
+--- qca-2.1.3/CMakeLists.txt.orig	2019-10-15 19:40:02.865390511 +0200
++++ qca-2.1.3/CMakeLists.txt	2019-10-15 19:52:34.177220661 +0200
+@@ -49,6 +49,7 @@
+   # Do not automatically link Qt executables to qtmain target on Windows.
+   # QCA exucatables use console mode only. Not need to link against qtmain.lib.
+   set(Qt5_NO_LINK_QTMAIN ON)
++  set(CMAKE_CXX_STANDARD 11)
+   find_package(Qt5Core QUIET)
+   mark_as_advanced(Qt5Core_DIR)
+ endif()
