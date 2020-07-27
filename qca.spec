@@ -1,15 +1,14 @@
 Summary:	Qt Cryptographic Architecture (QCA) Library
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA)
 Name:		qca
-Version:	2.1.3
-Release:	4
+Version:	2.2.1
+Release:	1
 License:	LGPL v2.1
 Group:		Libraries
-Source0:	http://download.kde.org/stable/qca/%{version}/src/%{name}-%{version}.tar.xz
-# Source0-md5:	5019cc29efcf828681cd93164238ce26
-Patch0:		openssl.patch
+Source0:	https://download.kde.org/stable/qca/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	5d809bf0ade891dc89dfd7639cbeaa9d
 Patch1:		qt5.patch
-URL:		http://delta.affinix.com/qca/
+URL:		https://invent.kde.org/libraries/qca
 BuildRequires:	Qt5Core-devel
 BuildRequires:	Qt5Gui-devel
 BuildRequires:	Qt5Network-devel
@@ -80,7 +79,6 @@ programistów.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 
 %build
