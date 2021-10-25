@@ -1,0 +1,22 @@
+--- qca-2.2.1/plugins/qca-ossl/qca-ossl.cpp~	2019-04-24 14:58:14.000000000 +0200
++++ qca-2.2.1/plugins/qca-ossl/qca-ossl.cpp	2021-10-25 09:47:06.323914358 +0200
+@@ -2048,7 +2048,9 @@
+ 		{
+ 		case EME_PKCS1v15:      pad = RSA_PKCS1_PADDING;       break;
+ 		case EME_PKCS1_OAEP:    pad = RSA_PKCS1_OAEP_PADDING;  break;
++#ifdef RSA_SSLV23_PADDING
+ 		case EME_PKCS1v15_SSL:  pad = RSA_SSLV23_PADDING;      break;
++#endif
+ 		case EME_NO_PADDING:    pad = RSA_NO_PADDING;          break;
+ 		default: return SecureArray(); break;
+ 		}
+@@ -2076,7 +2078,9 @@
+ 		{
+ 		case EME_PKCS1v15:      pad = RSA_PKCS1_PADDING;       break;
+ 		case EME_PKCS1_OAEP:    pad = RSA_PKCS1_OAEP_PADDING;  break;
++#ifdef RSA_SSLV23_PADDING
+ 		case EME_PKCS1v15_SSL:  pad = RSA_SSLV23_PADDING;      break;
++#endif
+ 		case EME_NO_PADDING:    pad = RSA_NO_PADDING;          break;
+ 		default: return false; break;
+ 		}
