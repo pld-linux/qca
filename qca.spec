@@ -26,9 +26,10 @@ BuildRequires:	qt4-build >= 4.7.0
 BuildRequires:	qt4-qmake >= 4.7.0
 BuildRequires:	which
 Provides:	qt4-plugin-qca-ossl = %{version}
-Obsoletes:	qt4-plugin-qca-cyrus-sasl
-Obsoletes:	qt4-plugin-qca-gnupg
-Obsoletes:	qt4-plugin-qca-ossl
+Requires:	QtCore >= 4.7.0
+Obsoletes:	qt4-plugin-qca-cyrus-sasl < 1:2.0.0-1
+Obsoletes:	qt4-plugin-qca-gnupg < 1:2.0.0-1
+Obsoletes:	qt4-plugin-qca-ossl < 1:2.0.0-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,7 +43,7 @@ Summary:	Qt Cryptographic Architecture (QCA) Library - development files
 Summary(pl.UTF-8):	Biblioteka Qt Cryptographic Architecture (QCA) - pliki dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	QtCore-devel
+Requires:	QtCore-devel >= 4.7.0
 
 %description devel
 Qt Cryptographic Architecture (QCA) Library - development files.
