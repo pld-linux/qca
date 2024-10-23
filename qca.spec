@@ -8,18 +8,22 @@ Group:		Libraries
 Source0:	https://download.kde.org/stable/qca/%{version}/%{name}-%{version}.tar.xz
 # Source0-md5:	5d809bf0ade891dc89dfd7639cbeaa9d
 Patch0:		openssl3.patch
+Patch1:		%{name}-libgcrypt.patch
 URL:		https://invent.kde.org/libraries/qca
-BuildRequires:	QtCore-devel
-BuildRequires:	QtGui-devel
-BuildRequires:	QtNetwork-devel
-BuildRequires:	QtTest-devel
-BuildRequires:	cmake >= 2.8.2
+BuildRequires:	QtCore-devel >= 4.7.0
+BuildRequires:	QtGui-devel >= 4.7.0
+BuildRequires:	QtNetwork-devel >= 4.7.0
+BuildRequires:	QtTest-devel >= 4.7.0
+BuildRequires:	botan2-devel >= 2
+BuildRequires:	cmake >= 3.4
+BuildRequires:	cyrus-sasl-devel >= 2
+BuildRequires:	libgcrypt-devel >= 1.8.5
 BuildRequires:	libstdc++-devel
 BuildRequires:	nss-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pkcs11-helper-devel
-BuildRequires:	qt4-build >= 4.3.3-3
-BuildRequires:	qt4-qmake >= 4.3.3-3
+BuildRequires:	qt4-build >= 4.7.0
+BuildRequires:	qt4-qmake >= 4.7.0
 BuildRequires:	which
 Provides:	qt4-plugin-qca-ossl = %{version}
 Obsoletes:	qt4-plugin-qca-cyrus-sasl
@@ -50,6 +54,7 @@ programistów.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
@@ -66,6 +71,7 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -80,10 +86,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/qcatool
 %attr(755,root,root) %{_bindir}/mozcerts
-%ghost %attr(755,root,root) %{_libdir}/libqca.so.2
-%attr(755,root,root) %{_libdir}/libqca.so.*.*
+%attr(755,root,root) %{_libdir}/libqca.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqca.so.2
 %dir %{_libdir}/qca
 %dir %{_libdir}/qca/crypto
+%attr(755,root,root) %{_libdir}/qca/crypto/libqca-botan.so
 %attr(755,root,root) %{_libdir}/qca/crypto/libqca-cyrus-sasl.so
 %attr(755,root,root) %{_libdir}/qca/crypto/libqca-gcrypt.so
 %attr(755,root,root) %{_libdir}/qca/crypto/libqca-gnupg.so
